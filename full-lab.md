@@ -315,7 +315,7 @@
 - Run a container with `bridge` network mode.
 
   ```sh
-  docker container run -d --network bridge --name nginx nginx
+  docker container run -d --network bridge --name nginx1 nginx
   ```
 
 - Open a website with host's web browser to verify that the container running in Docker private `bridge` network hence can't be accessed from outside of `bridge` network.
@@ -323,7 +323,7 @@
 - Inspect the container to get IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
 
   ```sh
-  docker container inspect <container ID or name>
+  docker container inspect nginx1
   ```
 
 - Run a new container and execute `wget` command to verify that the containers within the same `bridge` network can access to each other.
@@ -337,10 +337,16 @@
 - Run a container with `bridge` network mode and port forwarding.
 
   ```sh
-  docker container run -d --network bridge -p 8080:80 --name nginx nginx
+  docker container run -d --network bridge -p 8080:80 --name nginx2 nginx
   ```
 
 - Open a website with host's web browser to verify that the container running in Docker private `bridge` network with port forwarding can be accessed from outside of `bridge` network.
+
+- Inspect the container to get IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
+
+  ```sh
+  docker container inspect nginx2
+  ```
 
 - Run a new container and execute `wget` command to verify that the containers within the same `bridge` network can access to each other.
 
@@ -353,7 +359,7 @@
 - Run a container with `host` network mode and without port forwarding.
 
   ```sh
-  docker container run -d --network host --name nginx nginx
+  docker container run -d --network host --name nginx3 nginx
   ```
 
 - Open a website with host's web browser to verify that the container running with Docker `host` network can be accessed from the host's network.
@@ -361,7 +367,7 @@
 - Inspect the container to get IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
 
   ```sh
-  docker container inspect <container ID or name>
+  docker container inspect nginx3
   ```
 
 - Run a new container and execture `wget` command to verify that the container running in `bridge` network can also access to the container running in the `host` network (inter-networking).
@@ -413,13 +419,13 @@
 - Ping to `mynginx` container using IP Address.
 
   ```sh
-  ping <IP Address>
+  ping <mynginx container IP Address>
   ```
 
 - Try to get a home page from `mynginx` container.
 
   ```sh
-  wget -S -O- http://nginx
+  wget -S -O- http://mynginx
   ```
 
 ## Container Image management
@@ -483,7 +489,7 @@
 - Add a new tag for the existing container image to have multiple tags or versions.
 
   ```sh
-  docker image tag <your Docker Hub account>/node-website:1.0 <your Docker Hub account>/node-website:release
+  docker image tag <your Docker Hub account>/node-website:1.0 <your Docker Hub account>/node-website:latest
   ```
 
 - Get list of container images to verify the new tag gets created.
@@ -503,7 +509,8 @@
 - Push a container image to Docker hub
 
   ```sh
-  docker image push <your account>/node-website:release
+  docker image push <your Docker Hub account>/node-website:1.0
+  docker image push <your Docker Hub account>/node-website:latest
   ```
 
 - Go to Docker Hub [website](https://hub.docker.com/) to verify the image.
