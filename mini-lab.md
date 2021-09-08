@@ -337,8 +337,8 @@
 - Push a container image to Docker hub
 
   ```sh
-  docker image push <your account>/node-website:1.0
-  docker image push <your account>/node-website:latest
+  docker image push <your Docker Hub account>/node-website:1.0
+  docker image push <your Docker Hub account>/node-website:latest
   ```
 
 - Go to Docker Hub [website](https://hub.docker.com/) to verify the image.
