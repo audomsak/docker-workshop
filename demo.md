@@ -1,12 +1,18 @@
 # Docker Demo
 
-## Docker hub
+## Docker Hub
+
+___
 
 - Open Docker Hub [website](https://hub.docker.com/).
 
 - Quick tour, Official images, Tags, Dockerfile, and manual.
 
-## Pull container image form Docker Hub
+## Basic container usage
+
+___
+
+### - Pull container image form Docker Hub
 
 - Pull image without specifying a tag. The image with `latest` tag will get pulled.
 
@@ -24,7 +30,7 @@
   docker image pull nginx:1.21
   ```
 
-## Pull container image from non-Docker Hub image repository
+### - Pull container image from non-Docker Hub image repository
 
 - Pull image from [quay.io](quay.io) to demostrate that Docker can also pull image from other repositories.
 
@@ -32,7 +38,7 @@
   docker image pull quay.io/public/openjdk:8-slim
   ```
 
-## Get list of container images in local
+### - Get list of container images in local
 
 - Get list of container images.
 
@@ -42,7 +48,7 @@
   docker image ls
   ```
 
-## Run container with and without local image
+### - Run container with and without local image
 
 - Run a container with a pulled image.
 
@@ -66,7 +72,7 @@
   docker container run httpd
   ```
 
-## Inspect inside the running container
+### - Inspect inside the running container
 
 - Get an interactive terminal for a container using a command below. Then use `ls` command to explore file system hierarchy inside the container.
 
@@ -76,7 +82,7 @@
   docker container exec -it <container ID or name> /bin/sh
   ```
 
-## Running container with interactive mode, without interactive mode, and detatch mode
+### - Running container with interactive mode, without interactive mode, and detatch mode
 
 - Run a container with interactive mode.
 
@@ -102,7 +108,7 @@
   docker container run -d nginx
   ```
 
-## Get list of containers
+### - Get list of containers
 
 - Get list of `running` containers.
 
@@ -120,7 +126,7 @@
   docker container ps -a
   ```
 
-## Attach to container running in detatch mode
+### - Attach to container running in detatch mode
 
 - Attach local standard input, output, and error streams to a running container.
 
@@ -130,7 +136,7 @@
   docker container attach <container ID or name>
   ```
 
-## Execute command inside a container from outside
+### - Execute command inside a container from outside (host)
 
 - Run a command in a running container
 
@@ -140,7 +146,7 @@
   docker container exec <container ID or name> <command>
   ```
 
-## Start, Stop, and Delete an existing container
+### - Start, Stop, and Delete an existing container
 
 - Start a stopped container.
 
@@ -166,7 +172,29 @@
   docker container rm <container ID or name>
   ```
 
-## Inspect container’s volume
+### - Inspect container logs
+
+- Get all logs from a container.
+
+  ```sh
+  docker logs <container ID or name>
+  # OR
+  docker container logs <container ID or name>
+  ```
+
+- Keep following logs from a container.
+
+  ```sh
+  docker logs -f <container ID or name>
+  # OR
+  docker container logs -f <container ID or name>
+  ```
+
+### Container Storage: Docker Volume and Bind mount
+
+___
+
+### - Docker annonymous volume
 
 - Run a container that uses volume.
 
@@ -182,7 +210,7 @@
   docker container inspect <container ID or name>
   ```
 
-## Docker storage: named-volume and bind mount
+### - Docker named-volume
 
 - Run a container with a named-volume.
 
@@ -198,6 +226,8 @@
   docker container inspect <container ID or name>
   ```
 
+### - Docker bind mount
+
 - Run a container with bind mount.
 
   ```sh
@@ -212,7 +242,7 @@
   docker container inspect <container ID or name>
   ```
 
-## Docker volume management
+### - Docker volume management
 
 - Get list of volumes
 
@@ -232,9 +262,11 @@
   docker volume prune
   ```
 
-## Docker network: bridge, host and none
+## Container Network: Docker bridge, host and none networks
 
-### Bridge network mode demostration
+___
+
+### - Bridge network mode demostration
 
 - Run a container with the `bridge` network mode.
 
@@ -256,7 +288,7 @@
   docker container run --network bridge busybox wget -S -O- http://<IP Address>
   ```
 
-### Expose a container to outside of `bridge` network
+### - Expose a container to outside of `bridge` network
 
 - Run a container with `bridge` network mode and port forwarding.
 
@@ -272,7 +304,7 @@
   docker container run --network bridge busybox wget -S -O- http://<IP Address>
   ```
 
-### Host network mode demostration
+### - Host network mode demostration
 
 - Run a container with `host` network mode without port forwarding.
 
@@ -294,7 +326,7 @@
   docker container run --network bridge busybox wget -S -O- http://<IP Address>
   ```
 
-### User-defined `bridge` network
+### - User-defined `bridge` network
 
 - User can define new `bridge` networks to isolate container(s) from other containers with different network space. The user-defined `bridge` network also allow containers within the network to communicate to each other using both IP Address and container name while the default `bridge` network allows the communication using IP Address only.
 
@@ -346,25 +378,11 @@
   wget -S -O- http://nginx
   ```
 
-## Inspect container logs
+## Container Image management
 
-- Get all logs from a container.
+___
 
-  ```sh
-  docker logs <container ID or name>
-  # OR
-  docker container logs <container ID or name>
-  ```
-
-- Keep following logs from a container.
-
-  ```sh
-  docker logs -f <container ID or name>
-  # OR
-  docker container logs -f <container ID or name>
-  ```
-
-## Building container image
+### - Building container image
 
 - Clone a project from GitHub.
 
@@ -418,7 +436,7 @@
   docker container run -d -p 8080:80 --name website audomsak/node-website:1.0
   ```
 
-## Tagging and versioning
+### - Tagging and versioning
 
 - Add new tag for the existing container image to have multiple tags or versions.
 
@@ -432,7 +450,7 @@
   docker image ls
   ```
 
-## Pushing container image to Docker hub
+### - Pushing container image to Docker Hub
 
 - Login to Docker hub using the command below then enter username and password.
 
@@ -448,7 +466,11 @@
 
 - Go to Docker hub [website](https://hub.docker.com/) to verify the image.
 
-## Clean up containers, images and volumes
+## Administration
+
+___
+
+### - Clean up containers, images and volumes
 
 - Clean up containers
 
@@ -474,10 +496,13 @@
   docker system prune
   ```
 
-## Check disk usage
+### - Check disk usage
 
-```sh
-docker system df
-```
+- Check how many disk space used by Docker
 
----
+  ```sh
+  docker system df
+  ```
+
+___
+
