@@ -1,12 +1,4 @@
-# Docker Demo
-
-## Docker Hub
-
-___
-
-- Open Docker Hub [website](https://hub.docker.com/).
-
-- Quick tour, Official images, Tags, Dockerfile, and manual.
+# Docker Workshop
 
 ## Basic container usage
 
