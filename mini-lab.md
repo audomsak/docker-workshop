@@ -268,6 +268,12 @@
 
 - Open a website with host's web browser to verify that the container running in Docker private `bridge` network with port forwarding can be accessed from outside of `bridge` network.
 
+- Inspect the container to get IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
+
+  ```sh
+  docker container inspect nginx
+  ```
+
 - Run a new container and execute `wget` command to verify that the containers within the same `bridge` network can access to each other.
 
   ```sh
