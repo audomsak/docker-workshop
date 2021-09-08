@@ -256,7 +256,7 @@
 
 - Use `ls` command or a file explorer to explore data inside the `$HOME/docker/pgdata` directory.
 
-## Container Network: Docker bridge, host and none networks
+## Container Network
 
 ### - Expose a service running in container to outside of `bridge` network (Default network)
 
@@ -269,28 +269,6 @@
 - Open a website with host's web browser to verify that the container running in Docker private `bridge` network with port forwarding can be accessed from outside of `bridge` network.
 
 - Run a new container and execute `wget` command to verify that the containers within the same `bridge` network can access to each other.
-
-  ```sh
-  docker container run --network bridge busybox wget -S -O- http://<IP Address of another container>
-  ```
-
-### - Host network mode
-
-- Run a container with `host` network mode and without port forwarding.
-
-  ```sh
-  docker container run -d --network host --name nginx nginx
-  ```
-
-- Open a website with host's web browser to verify that the container running with Docker `host` network can be accessed from the host's network.
-
-- Inspect the container to get IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
-
-  ```sh
-  docker container inspect <container ID or name>
-  ```
-
-- Run a new container and execture `wget` command to verify that the container running in `bridge` network can also access to the container running in the `host` network (inter-networking).
 
   ```sh
   docker container run --network bridge busybox wget -S -O- http://<IP Address of another container>
