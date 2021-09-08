@@ -4,7 +4,7 @@
 
 ### - Pull container image form Docker Hub
 
-- Pull image without specifying a tag. The image with `latest` tag will get pulled.
+- Pull a container image without specifying a tag. Docker will pull the image with `latest` tag.
 
   ```sh
   docker pull nginx
@@ -12,7 +12,7 @@
   docker image pull nginx
   ```
 
-- Pull image with a specific tag.
+- Pull container image with a specific tag.
 
   ```sh
   docker pull nginx:1.21
