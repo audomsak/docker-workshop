@@ -227,48 +227,66 @@
 - Run a container that uses volume.
 
   ```sh
-  docker container run -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb --name postgresdb postgres
+  docker container run -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb --name postgresdb1 postgres
   ```
 
-- Inspect the volume using a command below. Then look for `"Mounts"`. And then open a file explorer to verify that Docker has create an anonymous volume automatically.
+- Inspect the container to get volume information using the command below. Then look for `"Mounts"`.
 
   ```sh
-  docker inspect <container ID or name>
+  docker inspect postgresdb1
   # OR
-  docker container inspect <container ID or name>
+  docker container inspect postgresdb1
   ```
+
+- Verify that the anonymous volume gets created.
+
+  ```sh
+  docker volume ls
+  ```
+
+- (Optional) Use `ls` command or a file explorer to explore data inside the volume.
 
 ### - Docker Volume: named-volume
 
 - Run a container with a named-volume.
 
   ```sh
-  docker container run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb -v pgdata:/var/lib/postgresql/data --name postgres postgres
+  docker container run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb -v pgdata:/var/lib/postgresql/data --name postgresdb2 postgres
   ```
 
-- Inspect the volume using a command below. Then look for `"Mounts"`. And then open a file explorer to verify that Docker would create a named-volume automatically.
+- Inspect the container to get volume information using the command below. Then look for `"Mounts"`.
 
   ```sh
-  docker inspect <container ID or name>
+  docker inspect postgresdb2
   # OR
-  docker container inspect <container ID or name>
+  docker container inspect postgresdb2
   ```
+
+- Verify that the `pgdata` volume gets created.
+
+  ```sh
+  docker volume ls
+  ```
+
+- (Optional) Use `ls` command or a file explorer to explore data inside the volume.
 
 ### - Docker Bind mount
 
 - Run a container with bind mount.
 
   ```sh
-  docker run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb -v $HOME/docker/pgdata:/var/lib/postgresql/data --name postgres postgres
+  docker run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb -v $HOME/docker/pgdata:/var/lib/postgresql/data --name postgresdb3 postgres
   ```
 
-- Inspect the volume using a command below. Then look for `"Mounts"`. And then open a file explorer to verify that the directory (mount) get binded automatically.
+- Inspect the container to get volume information using the command below. Then look for `"Mounts"`.
 
   ```sh
-  docker inspect <container ID or name>
+  docker inspect postgresdb3
   # OR
-  docker container inspect <container ID or name>
+  docker container inspect postgresdb3
   ```
+
+- Use `ls` command or a file explorer to explore data inside the `$HOME/docker/pgdata` directory.
 
 ### - Docker volume management
 
