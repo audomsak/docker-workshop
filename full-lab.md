@@ -2,6 +2,10 @@
 
 ## Basic container usage
 
+<details>
+
+<summary>Lab details</summary>
+
 ### - Pull container image form Docker Hub
 
 - Pull container image without specifying a tag. Docker will pull the image with `latest` tag.
@@ -220,8 +224,13 @@
   docker container logs -f <container ID or name>
   ```
 
-### Container Storage: Docker Volume and Bind mount
+</details>
 
+### Container Storage
+
+<details>
+<summary>Lab details</summary>
+    
 ### - Docker Volume: anonymous volume
 
 - Run a container that uses volume.
@@ -308,7 +317,12 @@
   docker volume prune
   ```
 
-## Container Network: Docker bridge, host and none networks
+</details>
+
+## Container Network
+
+<details>
+<summary>Lab details</summary>
 
 ### - Bridge network mode
 
@@ -428,8 +442,13 @@
   wget -S -O- http://mynginx
   ```
 
+</details>
+
 ## Container Image management
 
+<details>
+<summary>Lab details</summary>
+    
 ### - Building container image
 
 - Clone a project from GitHub.
@@ -515,7 +534,12 @@
 
 - Go to Docker Hub [website](https://hub.docker.com/) to verify the image.
 
+</details>
+
 ## Administration
+
+<details>
+<summary>Lab details</summary>
 
 ### - Clean up containers, images and volumes
 
@@ -550,5 +574,7 @@
   ```sh
   docker system df
   ```
+
+</details>
 
 ___
