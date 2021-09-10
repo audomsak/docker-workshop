@@ -226,7 +226,7 @@
 
 </details>
 
-### Container Storage
+## Container Storage
 
 <details>
 <summary>Lab details</summary>
