@@ -297,7 +297,7 @@
 - Build a new container image and specify repository and tag.
 
   ```sh
-  docker image build -t <your Docker Hub account>/node-website:1.0 .
+  docker image build -t rhworkshop/exim-node-website:1.0 .
   ```
 
 - Get list of images to verify that building a container image and specified repository and tag, Docker would tag the container image with the specified tag.
@@ -309,7 +309,7 @@
 - Run a container with the image we just built.
 
   ```sh
-  docker container run -d -p 8080:80 --name mywebsite <your Docker Hub account>/node-website:1.0
+  docker container run -d -p 8080:80 --name mywebsite rhworkshop/exim-node-website:1.0
   ```
 
 ### - Tagging and versioning
@@ -317,7 +317,7 @@
 - Add a new tag for the existing container image to have multiple tags or versions.
 
   ```sh
-  docker image tag <your Docker Hub account>/node-website:1.0 <your Docker Hub account>/node-website:latest
+  docker image tag rhworkshop/exim-node-website:1.0 rhworkshop/exim-node-website:<your nickname>
   ```
 
 - Get list of container images to verify the new tag gets created.
@@ -328,17 +328,16 @@
 
 ### - Pushing container image to Docker Hub
 
-- Login to Docker hub using the command below then enter Docker Hub username and password.
+- Login to Docker hub using the command below.
 
   ```sh
-  docker login
+  docker login -u rhworkshop -p 0aaa51f7-2862-4cef-a299-a8ee14d3a34c
   ```
 
 - Push a container image to Docker hub
 
   ```sh
-  docker image push <your Docker Hub account>/node-website:1.0
-  docker image push <your Docker Hub account>/node-website:latest
+  docker image push rhworkshop/exim-node-website:<your nickname>
   ```
 
 - Go to Docker Hub [website](https://hub.docker.com/) to verify the image.
