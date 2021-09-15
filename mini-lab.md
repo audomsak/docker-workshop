@@ -182,7 +182,7 @@ However, some containers don't have the process that keeps running which then ke
 
 ___
 
-### Run a container in detatch mode
+### - Run a container in detatch mode
 
 Usually, as explained above, your terminal will get connected or binded to the container's `tty` when running a container and obviously that you won't be able to run any commands on the host with that terminal because the terminal is already dedicated to the container. If you need to run a container but don't need to tie your terminal to it then you can run the container in detatch mode.
 
@@ -330,7 +330,7 @@ ___
 
 ___
 
-### - Start, Stop, and Delete an existing container
+### - Manage containers
 
 - First, get list of all containers.
 
