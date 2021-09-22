@@ -150,11 +150,11 @@ ___
 
 ### - Running a container in interactive mode
 
-Usually, Docker will bind standard input (`stdin`), standard output (`stdout`) and standard error (`stderr`) (which usually is your terminal) to the container's `tty` when running a container. That's why you can see some outputs i.e. logs generated from the container.
+Usually, Docker will bind standard input (`stdin`), standard output (`stdout`), and standard error (`stderr`) (which usually is your terminal) to the container's `tty` when running a container. That's why you can see some outputs i.e. logs generated from the container.
 
-However, some containers don't have the process that keeps running which then keeps you terminal connected to container's `tty`. Ubuntu container, for example, wich doesn't contain any application that will keep running inside the container. It's default command that will be run when the container gets started is `bash` which does nothing but a Bash shell. So, if you needed to keep your terminal connected to the container's `tty` then you could run the container with interactive mode.
+However, some containers don't have the processes that keep running which then keep your terminal connected to the container's `tty`. Ubuntu container, for example, wich doesn't have any process that will keep running inside the container. It's default command that will be run when the container gets started is `bash` which does nothing but a Bash shell. So, if you need to keep your terminal connected to the container's `tty` then you can run the container with interactive mode.
 
-- First, run a container without interactive mode. You won't see any output like you ran NGINX container previously because the default command of Ubuntu image is `bash` and it doesn't do anything so it just runs and stops immediately.
+- First, run a container without interactive mode. You won't see any output like you ran NGINX container previously because the default command of Ubuntu container is `bash` and it doesn't do anything so it just runs and stops immediately.
 
   ```sh
   docker run ubuntu
@@ -215,7 +215,7 @@ ___
   ```sh
   docker ps
   # OR
-  docker container ps
+  docker container ls
   ```
 
 - Get list of all containers regardless of their statuses.
@@ -223,7 +223,7 @@ ___
   ```sh
   docker ps -a
   # OR
-  docker container ps -a
+  docker container ls -a
   ```
 
 ___
