@@ -444,7 +444,7 @@ ___
 
 Anonymous volume name is randomly generated, not human readible and hard to remember. It will be a nightmare if you run many containers that use many anonymous volumes because it will be hard to figure out which volume belongs to which container. Named-volume can help in this case.
 
-- Run a container with a named-volume by adding `-v` flag followed by volume name and path inside the container.
+- Run a container with a named-volume by adding `-v` flag followed by volume name and path inside the container separated by `:`.
 
   ```sh
   docker container run -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb -v pgdata:/var/lib/postgresql/data --name postgresdb2 -d postgres
