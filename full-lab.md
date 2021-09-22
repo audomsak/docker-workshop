@@ -793,7 +793,7 @@ ___
 
 ### - Pushing container image to Docker Hub
 
-- Login to Docker hub with your Docker Hub username and password.
+- Login to Docker Hub with your username and password.
 
   ```sh
   docker login

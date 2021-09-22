@@ -588,7 +588,7 @@ ___
 
 ### - Pushing container image to Docker Hub
 
-- Login to Docker hub with your Docker Hub username and password.
+- Login to Docker Hub with your username and password.
 
   ```sh
   docker login
@@ -598,7 +598,7 @@ ___
 
   ```sh
   docker image push <your Docker Hub account>/node-website:1.0
-  docker image push <your Docker Hub account>/node-website:latest
+  docker image push <your Docker Hub account>/node-website:release
   ```
 
 - Go to [Docker Hub website](https://hub.docker.com/) to verify the container image and tags.
