@@ -442,7 +442,7 @@ ___
 
 ### - Docker Volume: named-volume
 
-Anonymous volume name is randomly generated, not human readible and hard to remember. It would be a nightmare if you have run many containers that use many anonymous volumes because you which volume belongs to which container. Named-volume can help in this case.
+Anonymous volume name is randomly generated, not human readible and hard to remember. It would be a nightmare if you have run many containers that use many anonymous volumes because it will be hard to figure out which volume belongs to which container. Named-volume can help in this case.
 
 - Run a container with a named-volume by adding `-v` flag followed by volume name and path inside the container.
 
