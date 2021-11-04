@@ -474,7 +474,7 @@ You can also use bind mount to inject any directory into the container as well. 
 - Use `dir` command to explore data inside the `c:/mypgdata` directory.
 
   ```sh
-  dir $HOME/mypgdata
+  dir c:/mypgdata
   ```
 
 ___
