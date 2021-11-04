@@ -636,7 +636,7 @@ ___
 
 ___
 
-`IMPORTANT!` Please make sure that you switch Docker to Windows containers mode before start following lab
+`IMPORTANT!` Please make sure that you switch Docker to `Windows containers` mode before start following lab
 
 ___
 
