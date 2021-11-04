@@ -2,7 +2,7 @@
 
 ## Before start
 
-Some of follwoing lab instructions contain both [solo and management commands](https://blog.couchbase.com/docker-1-13-management-commands/). Both types of commands do the same things so you can choose one over the other as you like. The intention of having both command types in the lab is to let you be aware of and familiarize with them.
+Some of following lab instructions contain both [solo and management commands](https://blog.couchbase.com/docker-1-13-management-commands/). Both types of commands do the same things so you can choose one over the other as you like. The intention of having both command types in the lab is to let you be aware of and familiarize with them.
 
 ___
 
@@ -764,7 +764,7 @@ ___
 - Run a container with the image you have just built.
 
   ```sh
-  docker container run -d -p 1234:80 --name mywebsite <your Docker Hub account>/node-website:1.0
+  docker container run -d -p 1234:8080 --name mywebsite <your Docker Hub account>/node-website:1.0
   ```
 
 - Use `curl` command to verify that you can access to the website running in the container.
@@ -809,6 +809,29 @@ ___
 - Go to [Docker Hub website](https://hub.docker.com/) to verify the container image and tags.
 
 ___
+
+### - Pushing container image to Quay
+
+- Login to Quay with your username and password.
+
+  ```sh
+  docker login
+  ```
+
+  ```sh
+  docker image tag <your Docker Hub account>/node-website:1.0 <your Quay account>/node-website:release
+  ```
+
+- Push the container image to Quay
+
+  ```sh
+  docker image push <your Quay account>/node-website:release
+  ```
+
+- Go to [Quay website](https://quay.io/repository/) to verify the container image and tags.
+
+___
+
 
 </details>
 
