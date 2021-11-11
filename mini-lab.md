@@ -614,13 +614,13 @@ ___
   ```
 
   ```sh
-  docker image tag <your Docker Hub account>/node-website:1.0 <your Quay account>/node-website:release
+  docker image tag <your Docker Hub account>/node-website:1.0 quay.io/<your Quay account>/node-website:release
   ```
 
 - Push the container image to Quay
 
   ```sh
-  docker image push <your Quay account>/node-website:release
+  docker image push quay.io/<your Quay account>/node-website:release
   ```
 
 - Go to [Quay website](https://quay.io/repository/) to verify the container image and tags.
