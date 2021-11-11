@@ -32,6 +32,8 @@
 
 - [Docker Workshop by KubeOps Skills](https://youtube.com/playlist?list=PLWApnCxWplk4C4LkbV_TK87-NRaIgYZut)
 
+- [Container for Absolutely Beginner](https://youtu.be/H32b6260Ghc)
+
 ## Other hands-on labs
 
 - [Docker 101 Tutorial](https://www.docker.com/101-tutorial)
