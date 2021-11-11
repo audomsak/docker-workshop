@@ -610,7 +610,7 @@ ___
 - Login to Quay with your username and password.
 
   ```sh
-  docker login
+  docker login quay.io
   ```
 
   ```sh
