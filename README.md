@@ -10,7 +10,7 @@
 
 - [Play With Docker](https://labs.play-with-docker.com)
 
-- [Katakoda Docker playground](https://www.katacoda.com/courses/docker/playground) 
+- [Katakoda Docker playground](https://www.katacoda.com/courses/docker/playground)
 
 ## Free online VM workstation
 
@@ -29,6 +29,8 @@
 - [Docker online by CMDev](https://youtube.com/playlist?list=PLrR5PBmfm0hRW9jpTh4fG4E0JDnr8MNRX)
 
 - [Docker Workshop by KubeOps Skills](https://youtube.com/playlist?list=PLWApnCxWplk4C4LkbV_TK87-NRaIgYZut)
+
+- [Container for Absolutely Beginner](https://youtu.be/H32b6260Ghc)
 
 ## Other hands-on labs
 
