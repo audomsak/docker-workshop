@@ -24,7 +24,7 @@
 
 - [Docker Workshop by KubeOps Skills](https://youtube.com/playlist?list=PLWApnCxWplk4C4LkbV_TK87-NRaIgYZut)
 
-- [Container for Absolutely Beginner](https://youtu.be/H32b6260Ghc)
+- [Container for Absolutely Beginner](https://youtube.com/playlist?list=PLWApnCxWplk7Bx2VZnZGvxrxu7aWdoAI8)
 
 ## Hands-on Labs
 
