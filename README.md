@@ -1,5 +1,11 @@
 # Docker Workshop
 
+## Prerequisites
+
+- Docker Account [(Sign up)](https://hub.docker.com/signup)
+
+- Docker [(Get Docker)](https://docs.docker.com/get-docker/)
+
 ## Labs
 
 - [Full hands-on lab](full-lab.md)
