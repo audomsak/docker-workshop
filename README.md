@@ -1,5 +1,13 @@
 # Docker Workshop
 
+## Labs
+
+- [Full hands-on lab](full-lab.md)
+
+- [Mini hands-on lab](mini-lab.md)
+
+- [Mini hands-on lab for Windows](mini-lab-windows.md)
+
 ## Playground
 
 - [Play With Docker](https://labs.play-with-docker.com)
@@ -26,7 +34,7 @@
 
 - [Container for Absolutely Beginner](https://youtube.com/playlist?list=PLWApnCxWplk7Bx2VZnZGvxrxu7aWdoAI8)
 
-## Hands-on Lab, Tutorial, Useful resources
+## Other hands-on labs
 
 - [Docker 101 Tutorial](https://www.docker.com/101-tutorial)
 

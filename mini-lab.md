@@ -43,7 +43,7 @@ Apart from Docker Hub, Docker can also pull container images from other private 
 - Pulling an Open JDK 8 container image from [quay.io](quay.io).
 
   ```sh
-  docker image pull quay.io/aptible/nginx:latest
+  docker image pull quay.io/public/openjdk:8-slim
   ```
 
 ___
@@ -414,35 +414,9 @@ ___
 
 ___
 
-### - Docker Volume: anonymous volume
-
-Some of containers use volume to store data produced by the container (to be precise, the application running in the container). Docker will create (anonymous) volume for the container automatically.
-
-- Run a Postgres container that uses volume.
-
-  ```sh
-  docker container run -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb --name postgresdb1 -d postgres
-  ```
-
-- Inspect the container to get volume information using this command. Then look for `"Mounts"` section. You will see mount type, volume name, and its location.
-
-  ```sh
-  docker container inspect postgresdb1
-  ```
-
-- Verify that the anonymous volume gets created.
-
-  ```sh
-  docker volume ls
-  ```
-
-- (Optional) Use `ls` command to explore data inside the volume.
-
-___
-
 ### - Docker Volume: named-volume
 
-Anonymous volume name is randomly generated, not human readible and hard to remember. It will be a nightmare if you run many containers that use many anonymous volumes because it will be hard to figure out which volume belongs to which container. Named-volume can help in this case.
+Docker volume can be categorized into two types; Anonymous volume and Named-volume. Anonymous volume's name is randomly generated, not human readible and hard to remember. It will be a nightmare if you run many containers that use many anonymous volumes because it will be hard to figure out which volume belongs to which container. Named-volume can help in this case.
 
 - Run a container with a named-volume by adding `-v` flag followed by volume name and path inside the container separated by `:`.
 
@@ -498,41 +472,6 @@ You can also use bind mount to inject any directory into the container as well. 
 
 ___
 
-### - Docker volume management
-
-- Stop and delete all Postgres containers
-
-  ```sh
-  docker container stop postgresdb1 postgresdb2 postgresdb3
-  docker container rm postgresdb1 postgresdb2 postgresdb3
-  ```
-
-- Get list of volumes
-
-  ```sh
-  docker volume ls
-  ```
-
-- Remove `pgdata` volume
-
-  ```sh
-  docker volume rm pgdata
-  ```
-
-- Remove all unused volumes. Enter 'y' to confirm deletion.
-
-  ```sh
-  docker volume prune
-  ```
-
-- Verify all volumes have been deleted.
-
-  ```sh
-  docker volume ls
-  ```
-
-___
-
 </details>
 
 ## Container Network
@@ -546,32 +485,6 @@ ___
 ### - Bridge network mode
 
  The `bridge` network is a default network and containers will be running in this network automatically when you run any container and didn't specify the `--network` flag. However, adding `--network` flag is more clear and helps you to quickly know in which network the container will be running.
-
-- Run a container with `bridge` network mode.
-
-  ```sh
-  docker container run -d --network bridge --name nginx1 nginx
-  ```
-
-- Inspect the container to get its IP address using the command below. Look for  `"Networks"` section then `IPAddress` field.
-
-  ```sh
-  docker container inspect nginx1
-  ```
-
-- Use `curl` command to verify that the container running in the  `bridge` network is not bind to host's network and can be accessed from outside of `bridge` network using IP address.
-
-  ```sh
-  curl http://<nginx1 container IP address>
-  ```
-
-- Run a new container in the same `bridge` network and execute `wget` command to verify that the containers within the same `bridge` network can access to each other.
-
-  ```sh
-  docker container run --network bridge busybox wget -S -O- http://<nginx1 container IP address>
-  ```
-
-___
 
 ### - Forward traffic from host's network to containers in `bridge` network
 
@@ -598,98 +511,6 @@ ___
   ```sh
   docker container run --network bridge busybox wget -S -O- http://<nginx2 container IP address>
   ```
-
-___
-
-### - User-defined bridge network
-
-User can define new `bridge` networks to create new networks and isolate container(s) from other containers with different network namespace.
-
-The user-defined `bridge` network also allows containers within the network to communicate to each other using both IP Address and container name while the default `bridge` network allows the communication using IP Address only.
-
-- Create a new `bridge` network.
-
-  ```sh
-  docker network create mybridge
-  ```
-
-- Get list of networks to verify a new bridge network was created.
-
-  ```sh
-  docker network ls
-  ```
-
-- Run a container within `mybridge` network and name the container as `mynginx`.
-
-  ```sh
-  docker container run -d --network mybridge --name mynginx nginx
-  ```
-
-- Inspect the container to get its IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
-
-  ```sh
-  docker container inspect mynginx
-  ```
-
-- Run a `busybox` container within `mybridge` network with interactive mode.
-
-  ```sh
-  docker container run -it --network mybridge busybox sh
-  ```
-
-- Ping to `mynginx` container using IP Address.
-
-  ```sh
-  ping -c 4 <mynginx container IP Address>
-  ```
-
-- Ping to `mynginx` container using container name
-
-  ```sh
-  ping -c 4 mynginx
-  ```
-
-- Try to get a home page from `mynginx` container.
-
-  ```sh
-  wget -S -O- http://mynginx
-  ```
-
-___
-
-### - Host network mode
-
-- Run a container with `host` network mode by adding `--network host` flag without port forwarding. Docker will bind all ports exposed by the container to the ports on host.
-
-  ```sh
-  docker container run -d --network host --name nginx3 nginx
-  ```
-
-- Use `curl` command to verify that the container running with `host` network can be accessed without port forwarding.
-
-  ```sh
-  curl http://localhost:80
-  ```
-
-- Inspect the container using the command below then the `"Networks"` section. You will see that the Docker doesn't assign an IP address to the container because the container runs in the same host's network namespace so it uses host's IP address and ports.
-
-  ```sh
-  docker container inspect nginx3
-  ```
-
-- Get the host's IP address.
-
-  ```sh
-  hostname -i
-  ```
-
-- Run a new container in `bridge` network and execute `wget` command to verify that the container running in `bridge` network can also access to the container running in the `host` network (inter-networking).
-
-  ```sh
-  docker container run --network bridge busybox wget -S -O- http://<host IP Address>
-  ```
-
-- Type `exit` and press `Enter` on keyboard to exit from the container.
 
 ___
 
@@ -723,33 +544,7 @@ ___
   cat Dockerfile
   ```
 
-- Build a container image without specifying repository and tag.
-
-  ```sh
-  docker image build .
-  ```
-
-  Note. The `.` in the command above means current directory.
-
-- Get list of images to verify that a new container image is built. However, building a container image without specifying repository and tag makes the container hard to remember because Docker generated only image ID for the container image.
-
-  ```sh
-  docker image ls
-  ```
-
-- Build a new container image and specify repository name by adding `-t` flag followed by repository name.
-
-  ```sh
-  docker image build -t <your Docker Hub account>/node-website .
-  ```
-
-- Get list of images to verify that a new container image is built. Building a container image and specified only repository without tag would let Docker to add `latest` tag to the container image automatically.
-
-  ```sh
-  docker image ls
-  ```
-
-- Build a new container image and specify repository and tag by adding `:` after the repository name and followed by a tag name.
+- Build a new container image and tag it by adding `-t` flag followed by repository name and tag name seprated by `:`.
 
   ```sh
   docker image build -t <your Docker Hub account>/node-website:1.0 .
@@ -803,7 +598,7 @@ ___
 
   ```sh
   docker image push <your Docker Hub account>/node-website:1.0
-  docker image push <your Docker Hub account>/node-website:latest
+  docker image push <your Docker Hub account>/node-website:release
   ```
 
 - Go to [Docker Hub website](https://hub.docker.com/) to verify the container image and tags.
@@ -815,17 +610,17 @@ ___
 - Login to Quay with your username and password.
 
   ```sh
-  docker login
+  docker login quay.io
   ```
 
   ```sh
-  docker image tag <your Docker Hub account>/node-website:1.0 <your Quay account>/node-website:release
+  docker image tag <your Docker Hub account>/node-website:1.0 quay.io/<your Quay account>/node-website:release
   ```
 
 - Push the container image to Quay
 
   ```sh
-  docker image push <your Quay account>/node-website:release
+  docker image push quay.io/<your Quay account>/node-website:release
   ```
 
 - Go to [Quay website](https://quay.io/repository/) to verify the container image and tags.
@@ -834,52 +629,3 @@ ___
 
 
 </details>
-
-## Administration
-
-<details>
-
-<summary>Lab details</summary>
-
-___
-
-### - Clean up containers, images and volumes
-
-- Clean up containers
-
-  ```sh
-  docker container prune
-  ```
-
-- Clean up images
-
-  ```sh
-  docker image prune
-  ```
-
-- Clean up volumes
-
-  ```sh
-  docker volume prune
-  ```
-
-- Clean up containers, networks, images, and build cache
-
-  ```sh
-  docker system prune
-  ```
-
-___
-
-### - Check disk usage
-
-- Check how many disk space used by Docker
-
-  ```sh
-  docker system df
-  ```
-
-___
-
-</details>
-

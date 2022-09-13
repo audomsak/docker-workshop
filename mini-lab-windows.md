@@ -1,8 +1,19 @@
-# Docker Hands-on Lab for a beginner
+# Docker on Windows Hands-on Lab for a beginner
+
+## Prerequisite
+
+- Windows features: Hyper-V, Virtual Machine Platform, Windows Hypervisor Platform, and Windows Subsystem for Linux
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) for Windows
+- [Docker Hub](https://hub.docker.com/) account
+- [Quay](https://quay.io/) account (optional)
 
 ## Before start
 
-Some of following lab instructions contain both [solo and management commands](https://blog.couchbase.com/docker-1-13-management-commands/). Both types of commands do the same things so you can choose one over the other as you like. The intention of having both command types in the lab is to let you be aware of and familiarize with them.
+- Some of following lab instructions contain both [solo and management commands](https://blog.couchbase.com/docker-1-13-management-commands/). Both types of commands do the same things so you can choose one over the other as you like. The intention of having both command types in the lab is to let you be aware of and familiarize with them.
+
+- You can use either Windows PowerShell or Command Prompt (CMD) to complete this lab.
+
+- Make sure that Docker is in `Linux containers` mode before start the lab.
 
 ___
 
@@ -43,7 +54,7 @@ Apart from Docker Hub, Docker can also pull container images from other private 
 - Pulling an Open JDK 8 container image from [quay.io](quay.io).
 
   ```sh
-  docker image pull quay.io/aptible/nginx:latest
+  docker image pull quay.io/public/openjdk:8-slim
   ```
 
 ___
@@ -70,7 +81,7 @@ ___
   docker container run nginx:1.21
   ```
 
-- Press `Ctrl + C` on keyboard to stop and exit from the container.
+- Close PowerShell/CMD window or use Docker Desktop dashboard to stop and exit from the container.
 
 ___
 
@@ -84,7 +95,7 @@ Any container can be run without pulling the container image manually. Docker wi
   docker container run httpd
   ```
 
-- Press `Ctrl + C` on keyboard to stop and exit from the container.
+- Close PowerShell/CMD window or use Docker Desktop dashboard to stop and exit from the container.
 
 ___
 
@@ -100,7 +111,7 @@ Normally, a container will be given a random name when you run it without giving
   docker container run --name nginxserver nginx:1.21
   ```
 
-- Press `Ctrl + C` on keyboard to stop and exit from the container.
+- Close PowerShell/CMD window or use Docker Desktop dashboard to stop and exit from the container.
 
 ___
 
@@ -178,8 +189,6 @@ However, some containers don't have the processes that keep running which then k
 
 - Exit from the container by typing `exit` and press `Enter` on keyboard.
 
-- Then run `uname -a` again and compare the command outputs. You will see the different of outputs from the container and the host itself.
-
 ___
 
 ### - Run a container in detatch mode
@@ -248,7 +257,7 @@ ___
 
   You'll see date and time get printed out for every second.
 
-- Press `Ctrl + C` on keyboard to stop and exit from the container.
+- Close PowerShell/CMD window or use Docker Desktop dashboard to stop and exit from the container.
 
 ___
 
@@ -304,7 +313,7 @@ You can inspect and see what's inside a running container by executing the Shell
 
 - Use `ls` command to explore filesystem inside the container.
 
-- Type `exit` and press `enter` to exit. This will just exit from the Shell process and won't stop the main process of the container, NGINX, in this case.
+- Type `exit` and press `Enter` to exit from Shell prompt. This will just exit from the Shell process and won't stop the main process of the container, NGINX, in this case.
 
 ___
 
@@ -414,35 +423,9 @@ ___
 
 ___
 
-### - Docker Volume: anonymous volume
-
-Some of containers use volume to store data produced by the container (to be precise, the application running in the container). Docker will create (anonymous) volume for the container automatically.
-
-- Run a Postgres container that uses volume.
-
-  ```sh
-  docker container run -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb --name postgresdb1 -d postgres
-  ```
-
-- Inspect the container to get volume information using this command. Then look for `"Mounts"` section. You will see mount type, volume name, and its location.
-
-  ```sh
-  docker container inspect postgresdb1
-  ```
-
-- Verify that the anonymous volume gets created.
-
-  ```sh
-  docker volume ls
-  ```
-
-- (Optional) Use `ls` command to explore data inside the volume.
-
-___
-
 ### - Docker Volume: named-volume
 
-Anonymous volume name is randomly generated, not human readible and hard to remember. It will be a nightmare if you run many containers that use many anonymous volumes because it will be hard to figure out which volume belongs to which container. Named-volume can help in this case.
+Docker volume can be categorized into two types; Anonymous volume and Named-volume. Anonymous volume's name is randomly generated, not human readible and hard to remember. It will be a nightmare if you run many containers that use many anonymous volumes because it will be hard to figure out which volume belongs to which container. Named-volume can help in this case.
 
 - Run a container with a named-volume by adding `-v` flag followed by volume name and path inside the container separated by `:`.
 
@@ -462,8 +445,6 @@ Anonymous volume name is randomly generated, not human readible and hard to reme
   docker volume ls
   ```
 
-- (Optional) Use `ls` command to explore data inside the volume.
-
 ___
 
 ### - Docker Bind mount
@@ -475,7 +456,7 @@ You can also use bind mount to inject any directory into the container as well. 
 - Run a container and mount `mypgdata` directory to the container with bind mount.
 
   ```sh
-  docker run -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb -v $HOME/mypgdata:/var/lib/postgresql/data --name postgresdb3 postgres
+  docker run -d -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=testdb -v c:/mypgdata:/var/lib/postgresql/data --name postgresdb3 postgres
   ```
 
 - Inspect the container to get volume information using the command below. Then look for `"Mounts"` section. You will see mount type, volume name, and its location.
@@ -490,45 +471,10 @@ You can also use bind mount to inject any directory into the container as well. 
   docker volume ls
   ```
 
-- Use `ls` command to explore data inside the `$HOME/mypgdata` directory.
+- Use `dir` command to explore data inside the `c:/mypgdata` directory.
 
   ```sh
-  ls $HOME/mypgdata
-  ```
-
-___
-
-### - Docker volume management
-
-- Stop and delete all Postgres containers
-
-  ```sh
-  docker container stop postgresdb1 postgresdb2 postgresdb3
-  docker container rm postgresdb1 postgresdb2 postgresdb3
-  ```
-
-- Get list of volumes
-
-  ```sh
-  docker volume ls
-  ```
-
-- Remove `pgdata` volume
-
-  ```sh
-  docker volume rm pgdata
-  ```
-
-- Remove all unused volumes. Enter 'y' to confirm deletion.
-
-  ```sh
-  docker volume prune
-  ```
-
-- Verify all volumes have been deleted.
-
-  ```sh
-  docker volume ls
+  dir c:/mypgdata
   ```
 
 ___
@@ -547,32 +493,6 @@ ___
 
  The `bridge` network is a default network and containers will be running in this network automatically when you run any container and didn't specify the `--network` flag. However, adding `--network` flag is more clear and helps you to quickly know in which network the container will be running.
 
-- Run a container with `bridge` network mode.
-
-  ```sh
-  docker container run -d --network bridge --name nginx1 nginx
-  ```
-
-- Inspect the container to get its IP address using the command below. Look for  `"Networks"` section then `IPAddress` field.
-
-  ```sh
-  docker container inspect nginx1
-  ```
-
-- Use `curl` command to verify that the container running in the  `bridge` network is not bind to host's network and can be accessed from outside of `bridge` network using IP address.
-
-  ```sh
-  curl http://<nginx1 container IP address>
-  ```
-
-- Run a new container in the same `bridge` network and execute `wget` command to verify that the containers within the same `bridge` network can access to each other.
-
-  ```sh
-  docker container run --network bridge busybox wget -S -O- http://<nginx1 container IP address>
-  ```
-
-___
-
 ### - Forward traffic from host's network to containers in `bridge` network
 
 - Run a container with `bridge` network mode and add port forwarding by adding `-p 8080:80` flag so port `8080` on the host is mapped to port `80` of the container.
@@ -581,11 +501,7 @@ ___
   docker container run -d --network bridge -p 8080:80 --name nginx2 nginx
   ```
 
-- Use `curl` command to verify that the container running in the private `bridge` network with port forwarding now can be accessed from the host's network.
-
-  ```sh
-  curl http://localhost:8080
-  ```
+- Open `http://localhost:8080` in a web browser to verify that the container running in the private `bridge` network with port forwarding now can be accessed from the host's network.
 
 - Inspect the container to get IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
 
@@ -598,98 +514,6 @@ ___
   ```sh
   docker container run --network bridge busybox wget -S -O- http://<nginx2 container IP address>
   ```
-
-___
-
-### - User-defined bridge network
-
-User can define new `bridge` networks to create new networks and isolate container(s) from other containers with different network namespace.
-
-The user-defined `bridge` network also allows containers within the network to communicate to each other using both IP Address and container name while the default `bridge` network allows the communication using IP Address only.
-
-- Create a new `bridge` network.
-
-  ```sh
-  docker network create mybridge
-  ```
-
-- Get list of networks to verify a new bridge network was created.
-
-  ```sh
-  docker network ls
-  ```
-
-- Run a container within `mybridge` network and name the container as `mynginx`.
-
-  ```sh
-  docker container run -d --network mybridge --name mynginx nginx
-  ```
-
-- Inspect the container to get its IP address using the command below. Then look for `IPAddress` in the `"Networks"` section.
-
-  ```sh
-  docker container inspect mynginx
-  ```
-
-- Run a `busybox` container within `mybridge` network with interactive mode.
-
-  ```sh
-  docker container run -it --network mybridge busybox sh
-  ```
-
-- Ping to `mynginx` container using IP Address.
-
-  ```sh
-  ping -c 4 <mynginx container IP Address>
-  ```
-
-- Ping to `mynginx` container using container name
-
-  ```sh
-  ping -c 4 mynginx
-  ```
-
-- Try to get a home page from `mynginx` container.
-
-  ```sh
-  wget -S -O- http://mynginx
-  ```
-
-___
-
-### - Host network mode
-
-- Run a container with `host` network mode by adding `--network host` flag without port forwarding. Docker will bind all ports exposed by the container to the ports on host.
-
-  ```sh
-  docker container run -d --network host --name nginx3 nginx
-  ```
-
-- Use `curl` command to verify that the container running with `host` network can be accessed without port forwarding.
-
-  ```sh
-  curl http://localhost:80
-  ```
-
-- Inspect the container using the command below then the `"Networks"` section. You will see that the Docker doesn't assign an IP address to the container because the container runs in the same host's network namespace so it uses host's IP address and ports.
-
-  ```sh
-  docker container inspect nginx3
-  ```
-
-- Get the host's IP address.
-
-  ```sh
-  hostname -i
-  ```
-
-- Run a new container in `bridge` network and execute `wget` command to verify that the container running in `bridge` network can also access to the container running in the `host` network (inter-networking).
-
-  ```sh
-  docker container run --network bridge busybox wget -S -O- http://<host IP Address>
-  ```
-
-- Type `exit` and press `Enter` on keyboard to exit from the container.
 
 ___
 
@@ -723,33 +547,7 @@ ___
   cat Dockerfile
   ```
 
-- Build a container image without specifying repository and tag.
-
-  ```sh
-  docker image build .
-  ```
-
-  Note. The `.` in the command above means current directory.
-
-- Get list of images to verify that a new container image is built. However, building a container image without specifying repository and tag makes the container hard to remember because Docker generated only image ID for the container image.
-
-  ```sh
-  docker image ls
-  ```
-
-- Build a new container image and specify repository name by adding `-t` flag followed by repository name.
-
-  ```sh
-  docker image build -t <your Docker Hub account>/node-website .
-  ```
-
-- Get list of images to verify that a new container image is built. Building a container image and specified only repository without tag would let Docker to add `latest` tag to the container image automatically.
-
-  ```sh
-  docker image ls
-  ```
-
-- Build a new container image and specify repository and tag by adding `:` after the repository name and followed by a tag name.
+- Build a new container image and tag it by adding `-t` flag followed by repository name and tag name seprated by `:`.
 
   ```sh
   docker image build -t <your Docker Hub account>/node-website:1.0 .
@@ -767,17 +565,13 @@ ___
   docker container run -d -p 1234:8080 --name mywebsite <your Docker Hub account>/node-website:1.0
   ```
 
-- Use `curl` command to verify that you can access to the website running in the container.
-
-  ```sh
-  curl http://localhost:1234
-  ```
+- Open `http://localhost:1234` in a web browser to verify that you can access to the website running in the container.
 
 ___
 
 ### - Tagging and versioning
 
-- Add a new tag for the existing container image to have multiple tags or versions.
+- Add a new tag to the existing container image to have multiple tags or versions.
 
   ```sh
   docker image tag <your Docker Hub account>/node-website:1.0 <your Docker Hub account>/node-website:release
@@ -803,7 +597,7 @@ ___
 
   ```sh
   docker image push <your Docker Hub account>/node-website:1.0
-  docker image push <your Docker Hub account>/node-website:latest
+  docker image push <your Docker Hub account>/node-website:release
   ```
 
 - Go to [Docker Hub website](https://hub.docker.com/) to verify the container image and tags.
@@ -832,10 +626,9 @@ ___
 
 ___
 
-
 </details>
 
-## Administration
+## Windows Container
 
 <details>
 
@@ -843,43 +636,24 @@ ___
 
 ___
 
-### - Clean up containers, images and volumes
-
-- Clean up containers
-
-  ```sh
-  docker container prune
-  ```
-
-- Clean up images
-
-  ```sh
-  docker image prune
-  ```
-
-- Clean up volumes
-
-  ```sh
-  docker volume prune
-  ```
-
-- Clean up containers, networks, images, and build cache
-
-  ```sh
-  docker system prune
-  ```
+`IMPORTANT!` Please make sure that you switch Docker to `Windows containers` mode before start following lab
 
 ___
 
-### - Check disk usage
+### - Run Windows container
 
-- Check how many disk space used by Docker
+- Run a Windows container with a console application
 
   ```sh
-  docker system df
+  docker run mcr.microsoft.com/dotnet/samples
+  ```
+
+- Run a Windows container with a web application (ASP.NET)
+
+  ```sh
+  docker run -d -p 8000:80 mcr.microsoft.com/dotnet/samples:aspnetapp
   ```
 
 ___
 
 </details>
-
