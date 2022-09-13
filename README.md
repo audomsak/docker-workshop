@@ -38,8 +38,6 @@
 
 - [Docker 101 Tutorial](https://www.docker.com/101-tutorial)
 
-- [Learn Docker & Containers](https://www.katacoda.com/courses/docker)
-
 - [Play with Docker Classroom](https://training.play-with-docker.com)
 
 - [Docker labs by Collabnix](https://dockerlabs.collabnix.com)
