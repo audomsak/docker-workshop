@@ -6,6 +6,8 @@
 
 - [Mini hands-on lab](mini-lab.md)
 
+- [Mini hands-on lab for Windows](mini-lab-windows.md)
+
 ## Playground
 
 - [Play With Docker](https://labs.play-with-docker.com)
