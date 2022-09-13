@@ -43,7 +43,7 @@ Apart from Docker Hub, Docker can also pull container images from other private 
 - Pulling an Open JDK 8 container image from [quay.io](quay.io).
 
   ```sh
-  docker image pull quay.io/public/openjdk:8-slim
+  docker image pull quay.io/aptible/nginx:latest
   ```
 
 ___
