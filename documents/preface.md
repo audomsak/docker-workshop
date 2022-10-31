@@ -10,4 +10,7 @@ Please note that, some of lab instructions contain both [solo and management com
 
 - Docker Account [(Sign up)](https://hub.docker.com/signup)
 
-- Docker [(Get Docker)](https://docs.docker.com/get-docker/) or use [Docker Playground](reference-and-resource.md#playground) instead
+- Docker (Any one of these options)
+  - [Install Docker on your machine](https://docs.docker.com/get-docker/)
+  - [Docker Playground]([reference-and-resource.md#playground](https://labs.play-with-docker.com))
+  - [Request free VM and install Docker](install-docker-free-vm.md)
