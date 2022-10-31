@@ -12,5 +12,5 @@ Please note that, some of lab instructions contain both [solo and management com
 
 - Docker (Any one of these options)
   - [Install Docker on your machine](https://docs.docker.com/get-docker/)
-  - [Docker Playground]([reference-and-resource.md#playground](https://labs.play-with-docker.com))
+  - [Docker Playground](https://labs.play-with-docker.com)
   - [Request free VM and install Docker](appendix/install-docker-free-vm.md)
